@@ -3,6 +3,6 @@ Documentação MEAMT
 
 .. toctree::
    :maxdepth: 2
-   :caption: Conteúdo:
+   :caption: Notebooks:
 
-   ../../MEAMT
+   MEAMT
