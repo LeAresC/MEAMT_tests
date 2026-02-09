@@ -8,3 +8,8 @@ sphinx:
 python:
   install:
     - requirements: requirements.txt
+    - method: pip
+      path: .
+formats:
+  - htmlzip
+  - pdf
