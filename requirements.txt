@@ -1,7 +1,7 @@
-sphinx>=5.0
 nbsphinx
 ipykernel
 sphinx-rtd-theme
+pandoc
 deap
 matplotlib
 numpy

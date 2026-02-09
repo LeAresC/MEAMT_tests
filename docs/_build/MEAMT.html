@@ -1,0 +1,958 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>This tutorial relies on DEAP &mdash; MEANT 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/nbsphinx-code-cells.css?v=2aa19091" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=f2a433a1"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Documentação MEAMT" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            MEANT
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Conteúdos:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">This tutorial relies on DEAP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#Multiobjective-evolutionary-algorithms-with-many-tables---MEAMT">Multiobjective evolutionary algorithms with many tables - MEAMT</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Hypervolume-(HV)">Hypervolume (HV)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Selection-run-down">Selection run-down</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#Reference">Reference</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MEANT</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">This tutorial relies on DEAP</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/MEAMT.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="This-tutorial-relies-on-DEAP">
+<h1>This tutorial relies on DEAP<a class="headerlink" href="#This-tutorial-relies-on-DEAP" title="Link to this heading"></a></h1>
+<div style="display: flex; align-items: center;"><div style="flex: 0 0 auto; margin-right: 20px;"><p><img alt="Logo" class="no-scaled-link" src="https://deap.readthedocs.io/en/master/_images/deap_long.png" width="600" /></p>
+</div></div><ul class="simple">
+<li><p>Evolutionary computation in python.</p></li>
+<li><p>Toolbox, not a collection of algorithms.</p></li>
+<li><p>Easy to parallelize.</p></li>
+<li><p>Rather steep learning curve</p></li>
+</ul>
+</section>
+<section id="Multiobjective-evolutionary-algorithms-with-many-tables---MEAMT">
+<h1>Multiobjective evolutionary algorithms with many tables - MEAMT<a class="headerlink" href="#Multiobjective-evolutionary-algorithms-with-many-tables---MEAMT" title="Link to this heading"></a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">MEAMT</span></code> is among the first MOEAs to deal with real-world large-scale complex problems with many objectives</p>
+<ul class="simple">
+<li><p>Brasil, Christiane Regina Soares; Delbem, Alexandre Claudio Botazzo; Silva, Fernando Luís Barroso; <em>Multiobjective evolutionary algorithm with many tables for purely ab initio protein structure prediction</em> Journal of Computational Chemistry, Volume 34, Issue 20, 30 July 2013, Pages 1719-1734, doi: <a class="reference external" href="https://doi.org/10.1002/jcc.23315">10.1002/jcc.23315</a></p></li>
+<li><p>Lafetá, Thiago; Bueno, Marcos L.P.; Brasil, Christiane; Oliveira, Gina M.B.; <em>MEANDS: A Many-objective Evolutionary Algorithm based on Non-dominated Decomposed Sets applied to multicast routing</em>, Applied Soft Computing, Volume 62, 2018, Pages 851-866, ISSN 1568-4946, doi: <a class="reference external" href="https://doi.org/10.1016/j.asoc.2017.09.017">10.1016/j.asoc.2017.09.017</a>, sciencedirect: <a class="reference external" href="https://www.sciencedirect.com/science/article/pii/S1568494617305562">pii/S1568494617305562</a></p></li>
+</ul>
+<p>##Introduction</p>
+<p>This project employed <code class="docutils literal notranslate"><span class="pre">MEAMT</span></code> (Multiobjective Evolutionary Algorithm with many tables) for solving the <code class="docutils literal notranslate"><span class="pre">dtlz3</span></code> benchmark problem in hope to demonstrate the algorithm potential for multiobjective optimization.</p>
+<p>The algorithm works by isolating combinations of objectives in subpopulations called tables such that each table contains the best individuals in the population for any combination, this is done so that individuals that might have relevance for optimizing a certain objective or a combination of those are not discarded due to elitism, and the algorithm can remain diverse enough to escape local minimals.</p>
+<p>For assessement of the results the pareto front was poltted in 3d and compared to the know solution, resulting in a solution that is acurrate and also diverse.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">hypervolume</span></code> was also registred due to the Metric being able to asses both convergence and space (diversity), yielding a single scalar capable of representing the overall quality of the population.</p>
+<section id="Hypervolume-(HV)">
+<h2>Hypervolume (HV)<a class="headerlink" href="#Hypervolume-(HV)" title="Link to this heading"></a></h2>
+<p>The <strong>Hypervolume (HV)</strong>, originally proposed as the <em>S-metric</em>, is one of the most widely used metrics in multi-objective optimization. Its popularity stems from the fact that it is a unary metric capable of simultaneously capturing two crucial characteristics of a solution set:</p>
+<ol class="arabic simple">
+<li><p><strong>Convergence:</strong> The proximity of the solutions to the true Pareto Front.</p></li>
+<li><p><strong>Diversity:</strong> The spread and distribution of solutions within the objective space.</p></li>
+</ol>
+<p>Mathematically, Hypervolume calculates the volume of the objective space that is “dominated” by the obtained solution set (<span class="math notranslate nohighlight">\(S\)</span>), bounded by a reference point (<span class="math notranslate nohighlight">\(r\)</span>):</p>
+<div class="math notranslate nohighlight">
+\[HV(S, r) = \text{Vol} \left( \bigcup_{x \in S} [f_1(x), r_1] \times \dots \times [f_m(x), r_m] \right)\]</div>
+<p>The larger the Hypervolume value, the better the quality of the solution set [1].</p>
+<p>##DTLZ and Expected Outcome The DTLZ3 test function is a scalable, multi-objective optimization problem introduced by Deb et al. (2002). It is specifically designed to evaluate a Multi-Objective Evolutionary Algorithm’s (MOEA) ability to converge to the global Pareto-optimal front in the presence of massive multi-modality[2].</p>
+<p><strong>Mathematical Definition</strong></p>
+<p>The objective functions to be minimized are defined as follows:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+\min f_1(\mathbf{x}) &amp;= (1 + g(\mathbf{x}_M)) \cos(x_1\pi/2) \dots \cos(x_{M-1}\pi/2) \\
+\min f_2(\mathbf{x}) &amp;= (1 + g(\mathbf{x}_M)) \cos(x_1\pi/2) \dots \sin(x_{M-1}\pi/2) \\
+\vdots \\
+\min f_M(\mathbf{x}) &amp;= (1 + g(\mathbf{x}_M)) \sin(x_1\pi/2) \\
+\end{aligned}\end{split}\]</div>
+<p>The ruggedness of the landscape is governed by the <span class="math notranslate nohighlight">\(g(\mathbf{x}_M)\)</span> function, which uses a Rastrigin-like transformation:</p>
+<div class="math notranslate nohighlight">
+\[g(\mathbf{x}_M) = 100 \left[ |x_M| + \sum_{x_i \in \mathbf{x}_M} ((x_i - 0.5)^2 - \cos(20\pi(x_i - 0.5))) \right]\]</div>
+<p>The following image denotes a perfect pareto front solution to the problem</p>
+<div style="display: flex; align-items: center;"><div style="flex: 0 0 auto; margin-right: 20px;"><p><img alt="Logo" class="no-scaled-link" src="https://pymoo.org/_images/problems_many_dtlz_26_1.png" width="500" /></p>
+</div></div><p>##Implementation</p>
+<p>###Install DEAP</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">deap</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Collecting deap
+  Downloading deap-1.4.3-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (13 kB)
+Requirement already satisfied: numpy in /usr/local/lib/python3.12/dist-packages (from deap) (2.0.2)
+Downloading deap-1.4.3-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (135 kB)
+   <span class="ansi-black-intense-fg">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-green-fg">136.0/136.0 kB</span> <span class="ansi-red-fg">2.9 MB/s</span> eta <span class="ansi-cyan-fg">0:00:00</span>
+Installing collected packages: deap
+Successfully installed deap-1.4.3
+</pre></div></div>
+</div>
+<p>###Including methods and packages</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">deap</span><span class="w"> </span><span class="kn">import</span> <span class="n">creator</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">tools</span><span class="p">,</span> <span class="n">benchmarks</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">deap.benchmarks.tools</span><span class="w"> </span><span class="kn">import</span> <span class="n">hypervolume</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+<p>###Setting config</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">IND_SIZE</span> <span class="o">=</span> <span class="mi">12</span> <span class="c1"># Individual size (cromossome)</span>
+<span class="n">NPOP</span> <span class="o">=</span> <span class="mi">640</span> <span class="c1"># Population size</span>
+<span class="n">NGEN</span> <span class="o">=</span> <span class="mi">500</span> <span class="c1"># Number of generations</span>
+<span class="n">NOBJ</span> <span class="o">=</span> <span class="mi">3</span> <span class="c1"># Number of objectives</span>
+<span class="n">CXPB</span> <span class="o">=</span> <span class="mf">0.9</span> <span class="c1"># Denotes crossover probability</span>
+<span class="n">MUTPB</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="c1"># Denotes mutation probability</span>
+<span class="n">NUM_TABLES</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">NOBJ</span><span class="p">))</span> <span class="c1"># Indicates number of tables (8 for 3 objectives)</span>
+<span class="n">MAX_TABLE_SIZE</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">NPOP</span> <span class="o">/</span> <span class="n">NUM_TABLES</span><span class="p">)</span> <span class="c1"># Number of individuals in each subpopulation (table)</span>
+<br/></pre></div>
+</div>
+</div>
+<p>###Setup and Toolbox &gt; <code class="docutils literal notranslate"><span class="pre">DEAP</span></code> allows for creation of custom classes and functions along with pre-existing to facilitate implementation, in this case while <code class="docutils literal notranslate"><span class="pre">parent</span> <span class="pre">selection</span> <span class="pre">strategy</span></code> is custom-designed, the mutation and crossover operators utilize literature gold standard methods provided by the library. This way <code class="docutils literal notranslate"><span class="pre">MEAMT</span></code> perfomance can be isolated and determined with high certainty.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">creator</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s2">&quot;FitnessMin&quot;</span><span class="p">,</span> <span class="n">base</span><span class="o">.</span><span class="n">Fitness</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,)</span> <span class="o">*</span> <span class="n">NOBJ</span><span class="p">)</span>
+<span class="n">creator</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s2">&quot;Individual&quot;</span><span class="p">,</span> <span class="nb">list</span><span class="p">,</span> <span class="n">fitness</span><span class="o">=</span><span class="n">creator</span><span class="o">.</span><span class="n">FitnessMin</span><span class="p">,</span> <span class="n">Parent_Table</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">creator</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s2">&quot;SubPopulation&quot;</span><span class="p">,</span> <span class="nb">list</span><span class="p">,</span> <span class="n">score</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span> <span class="c1"># In MEAMT the population is distributed in subpopulations at scored tables</span>
+
+<span class="n">toolbox</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">Toolbox</span><span class="p">()</span>
+<span class="n">toolbox</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;attr_float&quot;</span><span class="p">,</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">)</span>
+<span class="n">toolbox</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;individual&quot;</span><span class="p">,</span> <span class="n">tools</span><span class="o">.</span><span class="n">initRepeat</span><span class="p">,</span> <span class="n">creator</span><span class="o">.</span><span class="n">Individual</span><span class="p">,</span> <span class="n">toolbox</span><span class="o">.</span><span class="n">attr_float</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">IND_SIZE</span><span class="p">)</span>
+<span class="n">toolbox</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;population&quot;</span><span class="p">,</span> <span class="n">tools</span><span class="o">.</span><span class="n">initRepeat</span><span class="p">,</span> <span class="nb">list</span><span class="p">,</span> <span class="n">toolbox</span><span class="o">.</span><span class="n">individual</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">NPOP</span><span class="p">)</span>
+<span class="n">toolbox</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;evaluate&quot;</span><span class="p">,</span> <span class="n">benchmarks</span><span class="o">.</span><span class="n">dtlz3</span><span class="p">,</span> <span class="n">obj</span><span class="o">=</span><span class="n">NOBJ</span><span class="p">)</span> <span class="c1"># Benchmark for this test</span>
+<span class="n">toolbox</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;mate&quot;</span><span class="p">,</span> <span class="n">tools</span><span class="o">.</span><span class="n">cxSimulatedBinaryBounded</span><span class="p">,</span> <span class="n">eta</span><span class="o">=</span><span class="mf">20.0</span><span class="p">,</span> <span class="n">low</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">up</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="n">toolbox</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;mutate&quot;</span><span class="p">,</span> <span class="n">tools</span><span class="o">.</span><span class="n">mutPolynomialBounded</span><span class="p">,</span> <span class="n">eta</span><span class="o">=</span><span class="mf">20.0</span><span class="p">,</span> <span class="n">low</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">up</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">indpb</span><span class="o">=</span><span class="mf">1.0</span><span class="o">/</span><span class="n">IND_SIZE</span><span class="p">)</span>
+
+<span class="n">REF_POINT_HV</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span>  <span class="c1"># Refpoints for Hypervolume</span>
+</pre></div>
+</div>
+</div>
+<p>###Auxiliar Functions</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># This function is used to calculate the combined fitness of an individual with respect to his table</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">calc_combined_fitness</span><span class="p">(</span><span class="n">ind</span><span class="p">,</span> <span class="n">table_idx</span><span class="p">):</span>
+    <span class="n">fit</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1"># Bit 0 -&gt; Obj 2 | Bit 1 -&gt; Obj 1 | Bit 2 -&gt; Obj 0</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">table_idx</span> <span class="o">&gt;&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">:</span> <span class="n">fit</span> <span class="o">+=</span> <span class="n">ind</span><span class="o">.</span><span class="n">fitness</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">table_idx</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">:</span> <span class="n">fit</span> <span class="o">+=</span> <span class="n">ind</span><span class="o">.</span><span class="n">fitness</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">table_idx</span> <span class="o">&gt;&gt;</span> <span class="mi">2</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">:</span> <span class="n">fit</span> <span class="o">+=</span> <span class="n">ind</span><span class="o">.</span><span class="n">fitness</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">fit</span>
+
+<span class="c1"># This function inserts inicial population in the tables</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">gen_inicial_tables</span><span class="p">(</span><span class="n">pop_ini</span><span class="p">,</span> <span class="n">num_tables</span><span class="p">,</span> <span class="n">table_size</span><span class="p">):</span>
+    <span class="n">tables</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+    <span class="c1"># Tabel 0: ND (Non Dominated)</span>
+    <span class="n">fronteira</span> <span class="o">=</span> <span class="n">tools</span><span class="o">.</span><span class="n">sortNondominated</span><span class="p">(</span><span class="n">pop_ini</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">pop_ini</span><span class="p">),</span> <span class="n">first_front_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">tables</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">creator</span><span class="o">.</span><span class="n">SubPopulation</span><span class="p">(</span><span class="n">fronteira</span><span class="p">[:</span><span class="n">table_size</span><span class="p">])</span> <span class="c1"># Corta se for maior</span>
+    <span class="n">tables</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">score</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+    <span class="c1"># Tabel 1 to 7</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_tables</span><span class="p">):</span>
+        <span class="n">pop_ordenada</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">pop_ini</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">ind</span><span class="p">:</span> <span class="n">calc_combined_fitness</span><span class="p">(</span><span class="n">ind</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span>
+        <span class="n">tables</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">creator</span><span class="o">.</span><span class="n">SubPopulation</span><span class="p">(</span><span class="n">pop_ordenada</span><span class="p">[:</span><span class="n">table_size</span><span class="p">])</span>
+        <span class="n">tables</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">score</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="k">return</span> <span class="n">tables</span>
+</pre></div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">MEAMT</span></code> selects the parents to reproduction by a tournment of 2, the tournment occours between tables with respect to their <code class="docutils literal notranslate"><span class="pre">score</span></code>, a selected table choses and individual of its subpopulation randomly and if such an individual generates succeful offspring the <code class="docutils literal notranslate"><span class="pre">score</span></code> of the table is increased by one.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">select_parents</span><span class="p">(</span><span class="n">tables</span><span class="p">,</span> <span class="n">num_tables</span><span class="p">):</span>
+    <span class="n">selected</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+         <span class="n">random1</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">num_tables</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+         <span class="n">random2</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">num_tables</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tables</span><span class="p">[</span><span class="n">random1</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="n">winner</span> <span class="o">=</span> <span class="n">random2</span>
+         <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">tables</span><span class="p">[</span><span class="n">random2</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="n">winner</span> <span class="o">=</span> <span class="n">random1</span>
+         <span class="k">elif</span> <span class="n">tables</span><span class="p">[</span><span class="n">random1</span><span class="p">]</span><span class="o">.</span><span class="n">score</span> <span class="o">&gt;=</span> <span class="n">tables</span><span class="p">[</span><span class="n">random2</span><span class="p">]</span><span class="o">.</span><span class="n">score</span><span class="p">:</span>
+             <span class="n">winner</span> <span class="o">=</span> <span class="n">random1</span>
+         <span class="k">else</span><span class="p">:</span>
+             <span class="n">winner</span> <span class="o">=</span> <span class="n">random2</span>
+
+         <span class="n">ind</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">tables</span><span class="p">[</span><span class="n">winner</span><span class="p">])</span>
+         <span class="n">ind</span><span class="o">.</span><span class="n">Parent_Table</span> <span class="o">=</span> <span class="n">winner</span>
+         <span class="n">selected</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ind</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">selected</span>
+</pre></div>
+</div>
+</div>
+<section id="Selection-run-down">
+<h3>Selection run-down<a class="headerlink" href="#Selection-run-down" title="Link to this heading"></a></h3>
+<p>To insert a new individual in a table we first verify if the new individual combained fitness is better than the worst of said table. This is done in the <code class="docutils literal notranslate"><span class="pre">Non</span> <span class="pre">Denominated</span></code> subpop by appending the new individual and selecting all individuals again using <code class="docutils literal notranslate"><span class="pre">NSGA-II</span></code>, if the individual survives, then the score of its parent is increased. In other tables linear search is used to find the worst individual present in the subpopulation, then its verified if its wheighted fitness is worse than the
+fitness from the new one, if it is, the worst individual is replaced in the subpop and, as previous, table score is increased.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">insert_in_tables</span><span class="p">(</span><span class="n">tables</span><span class="p">,</span> <span class="n">num_tables</span><span class="p">,</span> <span class="n">off</span><span class="p">,</span> <span class="n">max_table_size</span><span class="p">):</span>
+    <span class="c1"># 1. Insert on table ND (0)</span>
+    <span class="n">tabela_nd</span> <span class="o">=</span> <span class="n">tables</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">tabela_nd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">off</span><span class="p">)</span>
+    <span class="c1"># NSGA2 select</span>
+    <span class="n">nova_selecao</span> <span class="o">=</span> <span class="n">tools</span><span class="o">.</span><span class="n">selNSGA2</span><span class="p">(</span><span class="n">tabela_nd</span><span class="p">,</span> <span class="n">max_table_size</span><span class="p">)</span>
+    <span class="n">tabela_nd</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">nova_selecao</span>
+
+    <span class="c1"># Se off is in the table -&gt; increase score</span>
+    <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">ind</span> <span class="ow">is</span> <span class="n">off</span> <span class="k">for</span> <span class="n">ind</span> <span class="ow">in</span> <span class="n">tabela_nd</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">off</span><span class="o">.</span><span class="n">Parent_Table</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">tables</span><span class="p">[</span><span class="n">off</span><span class="o">.</span><span class="n">Parent_Table</span><span class="p">]</span><span class="o">.</span><span class="n">score</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="c1"># Try to insert in other tables</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_tables</span><span class="p">):</span>
+        <span class="n">fit_off</span> <span class="o">=</span> <span class="n">calc_combined_fitness</span><span class="p">(</span><span class="n">off</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+
+        <span class="n">worse_val</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span>
+        <span class="n">worse_idx</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">ind</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tables</span><span class="p">[</span><span class="n">i</span><span class="p">]):</span>
+            <span class="n">fit_ind</span> <span class="o">=</span> <span class="n">calc_combined_fitness</span><span class="p">(</span><span class="n">ind</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">fit_ind</span> <span class="o">&gt;</span> <span class="n">worse_val</span><span class="p">:</span>
+                <span class="n">worse_val</span> <span class="o">=</span> <span class="n">fit_ind</span>
+                <span class="n">worse_idx</span> <span class="o">=</span> <span class="n">idx</span>
+
+        <span class="c1"># Minimization: If new is less than the worst, replaces it</span>
+        <span class="k">if</span> <span class="n">fit_off</span> <span class="o">&lt;</span> <span class="n">worse_val</span><span class="p">:</span>
+            <span class="n">tables</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">worse_idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">off</span>
+            <span class="k">if</span> <span class="n">off</span><span class="o">.</span><span class="n">Parent_Table</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">tables</span><span class="p">[</span><span class="n">off</span><span class="o">.</span><span class="n">Parent_Table</span><span class="p">]</span><span class="o">.</span><span class="n">score</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<p>In the “run” function the algoritm is executed “NGEN” times. For each offspring, crossover and mutation operators are applied, at each gen the <code class="docutils literal notranslate"><span class="pre">tables</span> <span class="pre">scores</span></code> are reset, this way is reduced.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="n">tables</span><span class="p">,</span> <span class="n">num_tables</span><span class="p">,</span> <span class="n">max_table_size</span><span class="p">,</span> <span class="n">ngen</span><span class="p">,</span> <span class="n">toolbox</span><span class="p">,</span> <span class="n">cxpb</span><span class="p">,</span> <span class="n">mutpb</span><span class="p">):</span>
+    <span class="n">logbook</span> <span class="o">=</span> <span class="n">tools</span><span class="o">.</span><span class="n">Logbook</span><span class="p">()</span>
+    <span class="n">logbook</span><span class="o">.</span><span class="n">header</span> <span class="o">=</span> <span class="s2">&quot;gen&quot;</span><span class="p">,</span> <span class="s2">&quot;hypervolume&quot;</span>
+    <span class="k">for</span> <span class="n">gen</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ngen</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="c1"># Reset score</span>
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tables</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>     <span class="n">t</span><span class="o">.</span><span class="n">score</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">((</span><span class="n">max_table_size</span> <span class="o">*</span> <span class="n">num_tables</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">):</span>
+             <span class="n">parents</span> <span class="o">=</span> <span class="n">select_parents</span><span class="p">(</span><span class="n">tables</span><span class="p">,</span> <span class="n">num_tables</span><span class="p">)</span>
+
+             <span class="n">off1</span> <span class="o">=</span> <span class="n">toolbox</span><span class="o">.</span><span class="n">clone</span><span class="p">(</span><span class="n">parents</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+             <span class="n">off2</span> <span class="o">=</span> <span class="n">toolbox</span><span class="o">.</span><span class="n">clone</span><span class="p">(</span><span class="n">parents</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+             <span class="n">off1</span><span class="o">.</span><span class="n">Parent_Table</span> <span class="o">=</span> <span class="n">parents</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">Parent_Table</span>
+             <span class="n">off2</span><span class="o">.</span><span class="n">Parent_Table</span> <span class="o">=</span> <span class="n">parents</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">Parent_Table</span>
+
+             <span class="c1"># Crossover</span>
+             <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">cxpb</span><span class="p">:</span>
+                <span class="n">toolbox</span><span class="o">.</span><span class="n">mate</span><span class="p">(</span><span class="n">off1</span><span class="p">,</span> <span class="n">off2</span><span class="p">)</span>
+                <span class="k">del</span> <span class="n">off1</span><span class="o">.</span><span class="n">fitness</span><span class="o">.</span><span class="n">values</span>
+                <span class="k">del</span> <span class="n">off2</span><span class="o">.</span><span class="n">fitness</span><span class="o">.</span><span class="n">values</span>
+
+             <span class="c1"># Mutation</span>
+             <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">mutpb</span><span class="p">:</span>
+                <span class="n">toolbox</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="n">off1</span><span class="p">)</span>
+                <span class="k">del</span> <span class="n">off1</span><span class="o">.</span><span class="n">fitness</span><span class="o">.</span><span class="n">values</span>
+             <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">mutpb</span><span class="p">:</span>
+                <span class="n">toolbox</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="n">off2</span><span class="p">)</span>
+                <span class="k">del</span> <span class="n">off2</span><span class="o">.</span><span class="n">fitness</span><span class="o">.</span><span class="n">values</span>
+
+             <span class="c1"># Assessment</span>
+             <span class="k">if</span> <span class="ow">not</span> <span class="n">off1</span><span class="o">.</span><span class="n">fitness</span><span class="o">.</span><span class="n">valid</span><span class="p">:</span>
+                 <span class="n">off1</span><span class="o">.</span><span class="n">fitness</span><span class="o">.</span><span class="n">values</span> <span class="o">=</span> <span class="n">toolbox</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">off1</span><span class="p">)</span>
+             <span class="k">if</span> <span class="ow">not</span> <span class="n">off2</span><span class="o">.</span><span class="n">fitness</span><span class="o">.</span><span class="n">valid</span><span class="p">:</span>
+                 <span class="n">off2</span><span class="o">.</span><span class="n">fitness</span><span class="o">.</span><span class="n">values</span> <span class="o">=</span> <span class="n">toolbox</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">off2</span><span class="p">)</span>
+
+             <span class="c1"># Insertion</span>
+             <span class="n">insert_in_tables</span><span class="p">(</span><span class="n">tables</span><span class="p">,</span> <span class="n">num_tables</span><span class="p">,</span> <span class="n">off1</span><span class="p">,</span> <span class="n">max_table_size</span><span class="p">)</span>
+             <span class="n">insert_in_tables</span><span class="p">(</span><span class="n">tables</span><span class="p">,</span> <span class="n">num_tables</span><span class="p">,</span> <span class="n">off2</span><span class="p">,</span> <span class="n">max_table_size</span><span class="p">)</span>
+        <span class="n">hv_val</span> <span class="o">=</span> <span class="n">hypervolume</span><span class="p">(</span><span class="n">tables</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">REF_POINT_HV</span><span class="p">)</span>
+        <span class="n">logbook</span><span class="o">.</span><span class="n">record</span><span class="p">(</span><span class="n">gen</span><span class="o">=</span><span class="n">gen</span><span class="p">,</span><span class="n">hypervolume</span><span class="o">=</span><span class="n">hv_val</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">logbook</span><span class="o">.</span><span class="n">stream</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">logbook</span>
+</pre></div>
+</div>
+</div>
+<p>Main Function</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">pop_ini</span> <span class="o">=</span> <span class="n">toolbox</span><span class="o">.</span><span class="n">population</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">ind</span> <span class="ow">in</span> <span class="n">pop_ini</span><span class="p">:</span>
+        <span class="n">ind</span><span class="o">.</span><span class="n">fitness</span><span class="o">.</span><span class="n">values</span> <span class="o">=</span> <span class="n">toolbox</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">ind</span><span class="p">)</span>
+
+    <span class="n">tables</span> <span class="o">=</span> <span class="n">gen_inicial_tables</span><span class="p">(</span><span class="n">pop_ini</span><span class="p">,</span> <span class="n">NUM_TABLES</span><span class="p">,</span> <span class="n">MAX_TABLE_SIZE</span><span class="p">)</span>
+    <span class="n">logbook</span> <span class="o">=</span> <span class="n">run</span><span class="p">(</span><span class="n">tables</span><span class="p">,</span> <span class="n">NUM_TABLES</span><span class="p">,</span> <span class="n">MAX_TABLE_SIZE</span><span class="p">,</span> <span class="n">NGEN</span><span class="p">,</span> <span class="n">toolbox</span><span class="p">,</span> <span class="n">CXPB</span><span class="p">,</span> <span class="n">MUTPB</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+gen     hypervolume
+1       0
+2       0
+3       0
+4       0
+5       0
+6       0
+7       0
+8       0
+9       0
+10      0
+11      0
+12      0
+13      0
+14      0
+15      0
+16      0
+17      0
+18      0
+19      0
+20      0
+21      0
+22      0
+23      0
+24      0
+25      0
+26      0
+27      0
+28      0
+29      0
+30      0
+31      0
+32      0
+33      0
+34      0
+35      0
+36      0
+37      0
+38      0
+39      0
+40      0
+41      0
+42      0
+43      0
+44      0
+45      0
+46      0
+47      0
+48      0
+49      0
+50      0
+51      0
+52      0
+53      0
+54      0
+55      0
+56      0
+57      0
+58      0
+59      0
+60      0
+61      0
+62      0
+63      0
+64      0
+65      0
+66      0
+67      0
+68      0
+69      0
+70      0
+71      0
+72      0
+73      0
+74      0
+75      0
+76      0
+77      0
+78      0
+79      0
+80      0
+81      0
+82      0
+83      0
+84      0
+85      0
+86      0
+87      0
+88      0
+89      0
+90      0
+91      0
+92      0
+93      0
+94      0
+95      0
+96      0
+97      0
+98      0
+99      0
+100     0
+101     0
+102     0
+103     0
+104     0
+105     0
+106     0
+107     0
+108     0
+109     0
+110     0
+111     0
+112     0
+113     0
+114     0
+115     0
+116     0
+117     0
+118     0
+119     0
+120     0
+121     0
+122     0
+123     0
+124     0
+125     0
+126     0
+127     0
+128     0
+129     0
+130     0
+131     0
+132     0
+133     0
+134     0
+135     0
+136     0
+137     0
+138     0
+139     0
+140     0
+141     0
+142     0
+143     0
+144     0
+145     0
+146     0.00327376
+147     0.00327376
+148     0.00998055
+149     0.00998055
+150     0.0298085
+151     0.0352006
+152     0.0371403
+153     0.0845279
+154     0.0936694
+155     0.123411
+156     0.140321
+157     0.142327
+158     0.149477
+159     0.161649
+160     0.189509
+161     0.201461
+162     0.207073
+163     0.208222
+164     0.212826
+165     0.213685
+166     0.230405
+167     0.25065
+168     0.252992
+169     0.266068
+170     0.26666
+171     0.293455
+172     0.29917
+173     0.299967
+174     0.30725
+175     0.307678
+176     0.330155
+177     0.336923
+178     0.342165
+179     0.34585
+180     0.349954
+181     0.374601
+182     0.376431
+183     0.377576
+184     0.396348
+185     0.399219
+186     0.40385
+187     0.402322
+188     0.414859
+189     0.423368
+190     0.42386
+191     0.426178
+192     0.429038
+193     0.431195
+194     0.43659
+195     0.476445
+196     0.476711
+197     0.477444
+198     0.486706
+199     0.487773
+200     0.508883
+201     0.510365
+202     0.525523
+203     0.546141
+204     0.54888
+205     0.59226
+206     0.59487
+207     0.599787
+208     0.601017
+209     0.602919
+210     0.624184
+211     0.627331
+212     0.641967
+213     0.635608
+214     0.637216
+215     0.636793
+216     0.639972
+217     0.638333
+218     0.641425
+219     0.646708
+220     0.646722
+221     0.643233
+222     0.649565
+223     0.649555
+224     0.654397
+225     0.654149
+226     0.653268
+227     0.654078
+228     0.654221
+229     0.654247
+230     0.665096
+231     0.665487
+232     0.666443
+233     0.666223
+234     0.670207
+235     0.674672
+236     0.675422
+237     0.676056
+238     0.675699
+239     0.675911
+240     0.675901
+241     0.676668
+242     0.681506
+243     0.686236
+244     0.69395
+245     0.692593
+246     0.697413
+247     0.691579
+248     0.694022
+249     0.694644
+250     0.693642
+251     0.693565
+252     0.694379
+253     0.694851
+254     0.69498
+255     0.695892
+256     0.694623
+257     0.694877
+258     0.69525
+259     0.69499
+260     0.700303
+261     0.698218
+262     0.69722
+263     0.696402
+264     0.696437
+265     0.687962
+266     0.689035
+267     0.692975
+268     0.693141
+269     0.691038
+270     0.6914
+271     0.691209
+272     0.692571
+273     0.692213
+274     0.692232
+275     0.693114
+276     0.693089
+277     0.695458
+278     0.696148
+279     0.695956
+280     0.696524
+281     0.696538
+282     0.696538
+283     0.696472
+284     0.697513
+285     0.697559
+286     0.698582
+287     0.702544
+288     0.69801
+289     0.697957
+290     0.698456
+291     0.69836
+292     0.697176
+293     0.697674
+294     0.697114
+295     0.697437
+296     0.697544
+297     0.698363
+298     0.698478
+299     0.697357
+300     0.695593
+301     0.698134
+302     0.69861
+303     0.700415
+304     0.701515
+305     0.70115
+306     0.700481
+307     0.701061
+308     0.700412
+309     0.700619
+310     0.701042
+311     0.698234
+312     0.699084
+313     0.700142
+314     0.699842
+315     0.700745
+316     0.702057
+317     0.705713
+318     0.701005
+319     0.701108
+320     0.699917
+321     0.699627
+322     0.699552
+323     0.702213
+324     0.699001
+325     0.701792
+326     0.700743
+327     0.700828
+328     0.700823
+329     0.700582
+330     0.705263
+331     0.705431
+332     0.705856
+333     0.706698
+334     0.706756
+335     0.706742
+336     0.707825
+337     0.706885
+338     0.706035
+339     0.706071
+340     0.70746
+341     0.707393
+342     0.705688
+343     0.706651
+344     0.704618
+345     0.703979
+346     0.703475
+347     0.702479
+348     0.702727
+349     0.702751
+350     0.702905
+351     0.703944
+352     0.704185
+353     0.704343
+354     0.704423
+355     0.704411
+356     0.704384
+357     0.704376
+358     0.703393
+359     0.705325
+360     0.705546
+361     0.705691
+362     0.705521
+363     0.705371
+364     0.70547
+365     0.704937
+366     0.704231
+367     0.704235
+368     0.704312
+369     0.705332
+370     0.704343
+371     0.70442
+372     0.704523
+373     0.704398
+374     0.705224
+375     0.705356
+376     0.704143
+377     0.705976
+378     0.705512
+379     0.705316
+380     0.706162
+381     0.706887
+382     0.707848
+383     0.707394
+384     0.708433
+385     0.709668
+386     0.708806
+387     0.710215
+388     0.7086
+389     0.708061
+390     0.707522
+391     0.705515
+392     0.705884
+393     0.707343
+394     0.706751
+395     0.706642
+396     0.705711
+397     0.707083
+398     0.706475
+399     0.707306
+400     0.707073
+401     0.705416
+402     0.701992
+403     0.702024
+404     0.7017
+405     0.7017
+406     0.701727
+407     0.700741
+408     0.704257
+409     0.704454
+410     0.707285
+411     0.702476
+412     0.697518
+413     0.696405
+414     0.697546
+415     0.69781
+416     0.693802
+417     0.693795
+418     0.694669
+419     0.695588
+420     0.694753
+421     0.69573
+422     0.697713
+423     0.696823
+424     0.695194
+425     0.694724
+426     0.694955
+427     0.698684
+428     0.697369
+429     0.693046
+430     0.69244
+431     0.692573
+432     0.69291
+433     0.692885
+434     0.694407
+435     0.694801
+436     0.694339
+437     0.695182
+438     0.695187
+439     0.69664
+440     0.696644
+441     0.696611
+442     0.695823
+443     0.695891
+444     0.697741
+445     0.697635
+446     0.698117
+447     0.697547
+448     0.697666
+449     0.698882
+450     0.698587
+451     0.697915
+452     0.696725
+453     0.691681
+454     0.691728
+455     0.691778
+456     0.69093
+457     0.691004
+458     0.690522
+459     0.695934
+460     0.694261
+461     0.699468
+462     0.700614
+463     0.695219
+464     0.697953
+465     0.697824
+466     0.698166
+467     0.694073
+468     0.694769
+469     0.695127
+470     0.695136
+471     0.695087
+472     0.694031
+473     0.693897
+474     0.693171
+475     0.691486
+476     0.691888
+477     0.691606
+478     0.68956
+479     0.691085
+480     0.692865
+481     0.693016
+482     0.69459
+483     0.694138
+484     0.694133
+485     0.696815
+486     0.696503
+487     0.69652
+488     0.699413
+489     0.699467
+490     0.700356
+491     0.700358
+492     0.700359
+493     0.700369
+494     0.70142
+495     0.699706
+496     0.699695
+497     0.699695
+498     0.700841
+499     0.700981
+500     0.699035
+</pre></div></div>
+</div>
+<p>Graphics and Visualization</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 3D Graphic of final pareto front</span>
+<span class="n">f1</span> <span class="o">=</span> <span class="p">[</span><span class="n">ind</span><span class="o">.</span><span class="n">fitness</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">ind</span> <span class="ow">in</span> <span class="n">tables</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+<span class="n">f2</span> <span class="o">=</span> <span class="p">[</span><span class="n">ind</span><span class="o">.</span><span class="n">fitness</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">ind</span> <span class="ow">in</span> <span class="n">tables</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+<span class="n">f3</span> <span class="o">=</span> <span class="p">[</span><span class="n">ind</span><span class="o">.</span><span class="n">fitness</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="k">for</span> <span class="n">ind</span> <span class="ow">in</span> <span class="n">tables</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">f1</span><span class="p">,</span> <span class="n">f2</span><span class="p">,</span> <span class="n">f3</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Solutions&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Final Pareto Front&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Hypervolume Graphic</span>
+<span class="n">gen</span> <span class="o">=</span> <span class="n">logbook</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;gen&quot;</span><span class="p">)</span>
+<span class="n">fit_hv</span> <span class="o">=</span> <span class="n">logbook</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;hypervolume&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">gen</span><span class="p">,</span> <span class="n">fit_hv</span><span class="p">,</span> <span class="s1">&#39;b-&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Hypervolume Convergence&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/MEAMT_25_0.png" src="_images/MEAMT_25_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/MEAMT_25_1.png" src="_images/MEAMT_25_1.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="Reference">
+<h2>Reference<a class="headerlink" href="#Reference" title="Link to this heading"></a></h2>
+<p>[1] E. Zitzler and L. Thiele, “Multiobjective evolutionary algorithms: a comparative case study and the strength Pareto approach,” in <em>IEEE Transactions on Evolutionary Computation</em>, vol. 3, no. 4, pp. 257-271, Nov. 1999.</p>
+<p>[2] Deb, K., Thiele, L., Laumanns, M., &amp; Zitzler, E. (2001). Scalable Test Problems for Evolutionary Multi-Objective Optimization.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Documentação MEAMT" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Luis Aires.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -15,9 +15,9 @@ release = '1.0'
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
 extensions = [
-    'nbsphinx',
     'sphinx.ext.mathjax',
     'sphinx.ext.napoleon',
+    'nbsphinx',
 ]
 templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', '**.ipynb_checkpoints']
