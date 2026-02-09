@@ -1,0 +1,10 @@
+# Ferramentas de Documentação
+sphinx>=5.0
+nbsphinx
+ipykernel
+sphinx-rtd-theme
+
+# Dependências do Código Fonte
+deap
+matplotlib
+numpy
