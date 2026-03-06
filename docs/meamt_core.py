@@ -35,7 +35,48 @@ def build_toolbox(funcao_avaliacao, ind_size, n_pop, n_obj):
 # ==========================================
 import numpy as np
 
-def generate_zdt3_front_true(n_points=10000):
+def generate_zdt1_front_true(n_points, n_size):
+    samples2 = np.array([[0]*(n_size - 1)]*n_points)
+    samples1 = np.random.uniform(low=0.0, high=1.0, size=(n_points, 1))
+    samples = np.column_stack((samples1, samples2)).tolist()
+    pf_ = [benchmarks.zdt1(ind) for ind in samples]
+    pf_ = np.array(pf_).tolist()
+    return pf_
+
+
+def generate_zdt2_front_true(n_points, n_size):
+    samples2 = np.array([[0]*(n_size - 1)]*n_points)
+    samples1 = np.random.uniform(low=0.0, high=1.0, size=(n_points, 1))
+    samples = np.column_stack((samples1, samples2)).tolist()
+    pf_ = [benchmarks.zdt2(ind) for ind in samples]
+    pf_ = np.array(pf_).tolist()
+    return pf_
+
+def generate_zdt4_front_true(n_points, n_size):
+    samples2 = np.array([[0]*(n_size - 1)]*n_points)
+    samples1 = np.random.uniform(low=0.0, high=1.0, size=(n_points, 1))
+    samples = np.column_stack((samples1, samples2)).tolist()
+    pf_ = [benchmarks.zdt4(ind) for ind in samples]
+    pf_ = np.array(pf_).tolist()
+    return pf_
+
+def generate_zdt6_front_true(n_points, n_size):
+    samples2 = np.array([[0]*(n_size - 1)]*n_points)
+    samples1 = np.random.uniform(low=0.0, high=1.0, size=(n_points, 1))
+    samples = np.column_stack((samples1, samples2)).tolist()
+    pf_ = [benchmarks.zdt6(ind) for ind in samples]
+    pf_ = np.array(pf_).tolist()
+    return pf_
+    
+    
+
+
+def generate_dtlz1_front_random(n_obj, n_points):
+    """Generates points on the DTLZ1 pareto front"""
+    pf = np.abs(np.random.dirichlet(alpha=(1,)*n_obj, size=n_points)*0.5)
+    return pf
+
+def generate_zdt3_front_true(n_points):
     """
     Gera a fronteira de Pareto verdadeira para o ZDT3.
     """
