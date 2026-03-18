@@ -60,6 +60,7 @@ def generate_zdt4_front_true(n_points, n_size):
     pf_ = np.array(pf_).tolist()
     return pf_
 
+
 def generate_zdt6_front_true(n_points, n_size):
     samples2 = np.array([[0]*(n_size - 1)]*n_points)
     samples1 = np.random.uniform(low=0.0, high=1.0, size=(n_points, 1))
@@ -207,19 +208,17 @@ def insert_in_tables(tables, num_tables, off, max_table_size, n_obj):
 # ==========================================
 # 4. LOOP PRINCIPAL
 # ==========================================
-def run(tables, pareto_front_true, num_tables, max_table_size, ngen, toolbox, cxpb, mutpb, ref_point_hv, n_obj):
+def run(tables, pareto_front_true, num_tables, max_table_size, ngen, toolbox, cxpb, mutpb, ref_point_hv, n_obj, reset):
     """Executa as gerações do algoritmo MEAMT (Versão Paralela)."""
     logbook = tools.Logbook()
     logbook.header = "gen", "hypervolume", "igd_plus"
     
     for gen in range(1, ngen + 1):
         # Reset score
-        for t in tables.values():     
-            t.score = 0.0
+        if gen%reset == 0:
+            for t in tables.values():     
+                t.score = 0.0
 
-        # =========================================================
-        # FASE 1: GERAR TODOS OS FILHOS DA GERAÇÃO
-        # =========================================================
         offspring = []
         for _ in range((max_table_size * num_tables) // 2):
             parents = select_parents(tables, num_tables)
@@ -241,32 +240,19 @@ def run(tables, pareto_front_true, num_tables, max_table_size, ngen, toolbox, cx
                 
             offspring.extend([off1, off2])
 
-        # =========================================================
-        # FASE 2: AVALIAÇÃO EM PARALELO (A Mágica acontece aqui!)
-        # =========================================================
-        # Separa apenas os indivíduos que sofreram mutação/crossover e precisam de avaliação
         invalid_ind = [ind for ind in offspring if not ind.fitness.valid]
         
-        # O toolbox.map vai distribuir a lista de indivíduos entre os núcleos do seu PC
         fitnesses = toolbox.map(toolbox.evaluate, invalid_ind)
-        
-        # Atribui os resultados de volta aos indivíduos
+
         for ind, fit in zip(invalid_ind, fitnesses):
             ind.fitness.values = fit
 
-        # =========================================================
-        # FASE 3: INSERÇÃO
-        # =========================================================
         for off in offspring:
             insert_in_tables(tables, num_tables, off, max_table_size,n_obj)
             
-        # =========================================================
-        # MÉTRICAS
-        # =========================================================
         hv_val = hypervolume(tables[0], ref_point_hv)
         approx_front = np.array([ind.fitness.values for ind in tables[0]])
         igd_plus_val = calculate_igd_plus(pareto_front_true, approx_front)
-        
         logbook.record(gen=gen, hypervolume=hv_val, igd_plus=igd_plus_val)
         
     return logbook
