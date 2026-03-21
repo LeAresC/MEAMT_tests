@@ -7,18 +7,18 @@ Documentação MEAMT
 
    introdução_e_métricas
    Implementação
-   dtlz1_3objs
-   dtlz1_4objs
-   dtlz1_5objs
-   dtlz2_3objs
-   dtlz2_4objs
-   dtlz2_5objs
-   dtlz3_3objs
-   dtlz3_4objs
-   dtlz3_5objs
-   dtlz4_3objs
-   dtlz4_4objs
-   dtlz4_5objs
+   dtlz1_3obj
+   dtlz1_4obj
+   dtlz1_5obj
+   dtlz2_3obj
+   dtlz2_4obj
+   dtlz2_5obj
+   dtlz3_3obj
+   dtlz3_4obj
+   dtlz3_5obj
+   dtlz4_3obj
+   dtlz4_4obj
+   dtlz4_5obj
    NSGAIII-dtlz1
    NSGAIII-dtlz2
    NSGAIII-dtlz3
