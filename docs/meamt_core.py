@@ -187,23 +187,17 @@ def insert_in_tables(tables, num_tables, off, max_table_size, n_obj):
 
     # Try to insert in other tables
     for i in range(1, num_tables):
-        # Repassando o n_obj aqui
-        fit_off = calc_combined_fitness(off, i, n_obj)
-        worse_val = -1.0
-        worse_idx = -1
-
-        for idx, ind in enumerate(tables[i]):
-            # Repassando o n_obj aqui
-            fit_ind = calc_combined_fitness(ind, i, n_obj)
-            if fit_ind > worse_val:
-                worse_val = fit_ind
-                worse_idx = idx
-
-        # Minimization: If new is less than the worst, replaces it
-        if fit_off < worse_val:
-            tables[i][worse_idx] = off
-            if off.Parent_Table is not None:
-                tables[off.Parent_Table].score += 1
+        tables[i].append(off)
+        # Sort table 'i' based on its specific objective combination (Minimization)
+        tables[i].sort(key=lambda ind: calc_combined_fitness(ind, i, n_obj))
+    
+        # Keep only the best 'max_table_size' individuals
+        if len(tables[i]) > max_table_size:
+            removed_ind = tables[i].pop() # Drops the worst
+        
+        # If the offspring SURVIVED the truncation, reward the parent's table
+        if off is not removed_ind and off.Parent_Table is not None:
+            tables[off.Parent_Table].score += 1
 
 # ==========================================
 # 4. LOOP PRINCIPAL
