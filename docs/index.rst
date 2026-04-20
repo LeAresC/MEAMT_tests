@@ -32,4 +32,5 @@ Documentação MEAMT
    zdt3
    zdt4
    zdt6
+   comparação
    conclusão_e_referências

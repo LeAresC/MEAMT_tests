@@ -243,7 +243,7 @@ def run(tables, pareto_front_true, num_tables, max_table_size, ngen, toolbox, cx
 
         for off in offspring:
             insert_in_tables(tables, num_tables, off, max_table_size,n_obj)
-            
+               
         hv_val = hypervolume(tables[0], ref_point_hv)
         approx_front = np.array([ind.fitness.values for ind in tables[0]])
         igd_plus_val = calculate_igd_plus(pareto_front_true, approx_front)
